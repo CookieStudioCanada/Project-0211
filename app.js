@@ -1,3 +1,7 @@
+function setBackgroundColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
 const form = document.querySelector("#add-product-form");
 const productsContainer = document.querySelector("#products");
 let products = [];
@@ -43,10 +47,10 @@ function renderProducts(productList = products) {
     div.classList.add("product");
     div.innerHTML = `
       <div>
-        <h3>${product.name}</h3>
-        <p>Price: ${product.price}</p>
-        <p>Info: ${product.info}</p>
-        <p>Quantity: ${product.quantity}</p>
+        <h4>${product.name}</h4>
+        Price: ${product.price}<br>
+        Info: ${product.info}<br>
+        Quantity: ${product.quantity}<br>
       </div>
       <div>
         <button class="delete-button">X</button>
