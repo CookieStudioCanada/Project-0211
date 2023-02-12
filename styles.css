@@ -1,0 +1,24 @@
+.product {
+	padding: 20px;
+	border: 1px solid black;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.delete-button {
+	background-color: red;
+	color: white;
+	cursor: pointer;
+}
+
+.modify-button {
+	background-color: blue;
+	color: white;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.modify-form {
+	display: none;
+}
