@@ -1,19 +1,23 @@
-function setBackgroundColor(color) {
-  document.body.style.backgroundColor = color;
-}
-
+// Informations
+const folderName = "productsList";
 const form = document.querySelector("#add-product-form");
 const productsContainer = document.querySelector("#products");
-let products = [];
+let products = JSON.parse(localStorage.getItem(folderName)) || [];
 
+// Form - Add products
 form.addEventListener("submit", event => {
   event.preventDefault();
+
   const name = document.querySelector("#name").value;
   const price = document.querySelector("#price").value;
   const info = document.querySelector("#info").value;
   const quantity = document.querySelector("#quantity").value;
+
   const product = { name, price, info, quantity };
+
   products.push(product);
+  localStorage.setItem(folderName, JSON.stringify(products));
+
   renderProducts();
 });
 
@@ -41,7 +45,12 @@ searchButton.addEventListener("click", event => {
 });
 
 function renderProducts(productList = products) {
+
+  let storedProducts = JSON.parse(localStorage.getItem(folderName)) || []; 
+  console.log(storedProducts);
+
   productsContainer.innerHTML = "";
+
   productList.forEach((product, index) => {
     const div = document.createElement("div");
     div.classList.add("product");
@@ -60,6 +69,7 @@ function renderProducts(productList = products) {
 			const deleteButton = div.querySelector(".delete-button");
 			deleteButton.addEventListener("click", () => {
 				products.splice(index, 1);
+        localStorage.setItem(folderName, JSON.stringify(products));
 				renderProducts();
 			});
 			const modifyButton = div.querySelector(".modify-button");
@@ -72,9 +82,17 @@ function renderProducts(productList = products) {
 					product.price = modifiedProduct[1];
 					product.info = modifiedProduct[2];
 					product.quantity = modifiedProduct[3];
+          localStorage.setItem(folderName, JSON.stringify(products));
 					renderProducts();
 				}
 			});
 			productsContainer.appendChild(div);
 		});
 	}
+
+function setBackgroundColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
+// Afficher les produits du localStorage
+renderProducts();
